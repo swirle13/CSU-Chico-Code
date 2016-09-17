@@ -1,2 +1,2 @@
 # C-functions
-C++ functions that I use for college.
+C++ functions and programs written for CSCI211.
