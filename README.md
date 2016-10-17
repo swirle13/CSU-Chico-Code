@@ -10,3 +10,8 @@ A video linked list. Includes functions to insert video, remove video, find vide
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/vlist.cpp">vlist.cpp</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/video.h">video.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/video.cpp">video.cpp</a><br>
+<b>P4 Assignment</b><br>
+A reverse Polish notation calculator that does the operations of /, *, -, +, and ^.<br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/calc.cpp">calc.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/dstack.h">dstack.h</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/dstack.cpp">dstack.cpp</a><br>
