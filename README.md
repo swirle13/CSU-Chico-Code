@@ -15,3 +15,10 @@ A reverse Polish notation calculator that does the operations of /, *, -, +, and
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/calc.cpp">calc.cpp</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/dstack.h">dstack.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/dstack.cpp">dstack.cpp</a><br>
+<b>P5 Assignment</b><br>
+A simulation of people entering and shopping at a mini mart. Uses linked list queues and an array for data structures. Takes command line arguments to operate.<br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/sim.cpp">sim.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/pqueue.h">pqueue.h</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/pqueue.cpp">pqueue.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/cust.h">cust.h</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/cust.cpp">cust.cpp</a><br>
