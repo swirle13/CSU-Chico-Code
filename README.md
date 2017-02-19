@@ -1,6 +1,6 @@
 # C++ functions and programs written for CSCI311.<br>
 <b>P1 Assignment</b><br>
-<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/doublylinkedlist.h">doublylinkedlist.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/doublylinkedlist.h">doublylinkedlist.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/table.cc">table.cpp</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/restaurant.cc">restaurant.cpp</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/party.cc">party.cpp</a><br>
