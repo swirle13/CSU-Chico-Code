@@ -4,8 +4,7 @@
 * @brief
 *    Declaration of a party of diners in a restaurant.
 *
-* @author Judy Challinger
-* @date 1/1/16
+* * @date 1/1/16
 */
 
 #ifndef CSCI_311_PARTY_H
