@@ -4,7 +4,7 @@
 * @brief
 *    Template for doubly linked list class.
 *
-* @author Judy Challinger and Troy Jones
+* @author Troy Jones
 * @date 1/1/16
 */
 
