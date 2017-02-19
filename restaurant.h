@@ -4,7 +4,7 @@
 * @brief
 *    Simulates seating diners in a restaurant.
 *
-* @author Judy Challinger
+* 
 * @date 1/1/16
 */
 
