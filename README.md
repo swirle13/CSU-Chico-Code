@@ -1,4 +1,14 @@
-
+# C++ functions and programs written for CSCI311.<br>
+<b>P1 Assignment</b><br>
+<a href="#">doublylinkedlist.cpp</a><br>
+<a href="#">table.cpp</a><br>
+<a href="#">restaurant.cpp</a><br>
+<a href="#">party.cpp</a><br>
+<a href="#">restaurant.h</a><br>
+<a href="#">table.h</a><br>
+<a href="#">party.h</a><br>
+<br>
+<br>
 # C++ functions and programs written for CSCI211.<br>
 <b>P1 Assignment</b><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/Chart.cpp">chart.cpp</a><br>
