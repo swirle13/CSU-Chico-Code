@@ -4,7 +4,7 @@
 * @brief
 *    Declaration of a class to represent a restaurant table.
 *
-* @author Judy Challinger
+* 
 * @date 1/1/16
 */
 
