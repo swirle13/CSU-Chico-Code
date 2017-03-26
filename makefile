@@ -1,18 +1,20 @@
 CXX = g++
 CXXFLAGS = -c -g -std=c++11 -Wall -W -Werror -pedantic
-LDFLAGS = 
+LDFLAGS =
 
-restaurant: restaurant.o table.o party.o
-	$(CXX) $(LDFLAGS) table.o party.o restaurant.o -o restaurant
+PROG = csort
 
-party.o: party.cc party.h
-	$(CXX) $(CXXFLAGS) party.cc
+$(PROG) : CensusSort.o CensusData.o CensusDataSorts.o
+	$(CXX) $(LDFLAGS) CensusSort.o CensusData.o CensusDataSorts.o -o $(PROG)
 
-table.o: table.cc table.h party.h
-	$(CXX) $(CXXFLAGS) table.cc
+CensusSort.o : CensusSort.cpp CensusData.h
+	$(CXX) $(CXXFLAGS) CensusSort.cpp
 
-restaurant.o: restaurant.cc restaurant.h doublylinkedlist.h table.h party.h
-	$(CXX) $(CXXFLAGS) restaurant.cc
+CensusData.o : CensusData.cpp CensusData.h
+	$(CXX) $(CXXFLAGS) CensusData.cpp
 
-clean:
-	rm *o restaurant
+CensusDataSorts.o : CensusDataSorts.cpp CensusData.h
+	$(CXX) $(CXXFLAGS) CensusDataSorts.cpp
+
+clean :
+	rm -f core $(PROG) *.o
