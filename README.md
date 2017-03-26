@@ -14,7 +14,7 @@ Implements sorting algorithms and times their performance. Sorts include: Insert
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusData.cpp">CensusData.cpp</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusData.h">CensusData.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusDataSorts.cpp">CensusDataSorts.cpp</a><br>
-<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusSorts.cpp">CensusSorts.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusSort.cpp">CensusSort.cpp</a><br>
 <br>
 <br>
 # C++ functions and programs written for CSCI211.<br>
