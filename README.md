@@ -8,6 +8,13 @@ Uses a doubly linked list to keep track of people waiting for available tables, 
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/restaurant.h">restaurant.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/table.h">table.h</a><br>
 <a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/party.h">party.h</a><br>
+<b>P2 Assignment</b><br>
+Implements sorting algorithms and times their performance. Sorts include: Insertion, Merge and Quick sorts.<br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/3cities.csv">3cities.csv</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusData.cpp">CensusData.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusData.h">CensusData.h</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusDataSorts.cpp">CensusDataSorts.cpp</a><br>
+<a href="https://github.com/sntnmjones/CSU-Chico-Code/blob/master/CensusSorts.cpp">CensusSorts.cpp</a><br>
 <br>
 <br>
 # C++ functions and programs written for CSCI211.<br>
