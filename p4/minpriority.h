@@ -1,3 +1,9 @@
+/**
+ * @file    minpriority.h
+ * 
+ * @author  Troy Jones
+ * @date    4/13/17
+ */
 #ifndef MINPRIORITYQ_H
 #define MINPRIORITYQ_H
 
@@ -12,7 +18,7 @@ public:
   void insert(std::string, unsigned int);
   void decreaseKey(std::string, unsigned int);
   std::string extractMin();
-  bool isMember(std::string);
+//   bool isMember(std::string);
 
 private:
   class Element
@@ -28,13 +34,18 @@ private:
   };
 
   std::vector<Element*> minHeap;
-    void buildMinHeap();
-    void minHeapify(unsigned int);
-    int findIndex(std::string);
-    int parent(int);
-    int left(int);
-    int right(int);
-    std::string popAndReturn();
+  void buildMinHeap();
+  void minHeapify(int);
+  int findIndex(std::string);
+  int left(int);
+  int right(int);
+  int parent(int);
+  std::string popAndReturn();
+
+//  UNDER CONSTRUCTION
+//   void minHeapInsert(int);
+//   Element heapExtractMin();
+//   void heapDecreaseKey(int, int);
 };
 
 #endif

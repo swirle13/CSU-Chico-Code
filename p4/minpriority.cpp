@@ -1,14 +1,37 @@
+/**
+ * @file minpriority.cpp   implements a priority queue
+ *
+ * @brief
+ *      Includes functions to insert, remove, and extract values from a priority
+ *  queue. 
+ *
+ * @author Troy Jones (tjones71)
+ * @date 4/13/17
+ */
 #include "minpriority.h"
 
+using std::cin;
+using std::cerr;
+using std::cout;
+using std::endl;
 using std::string;
 using std::vector;
 
+/**
+ *  MinPriorityQ::~MinPriorityQ() 
+ *
+ *  Deconstructor that erases the priority queue
+ */
 MinPriorityQ::~MinPriorityQ()
 {
     minHeap.clear();
 }
 
-
+/**
+ *  MinPriorityQ::buildMinHeap()
+ *
+ *  Calls minHeapify which creates a minHeap
+ */
 void MinPriorityQ::buildMinHeap()
 {
     // Build MinHeap Priority Queue
@@ -19,7 +42,10 @@ void MinPriorityQ::buildMinHeap()
     }
 }
 
-void MinPriorityQ::decreaseKey(string str, unsigned int key)
+/**
+ *  UNDER CONSTRUCTION
+ */
+/*void MinPriorityQ::decreaseKey(string str, unsigned int key)
 {
     if(isMember(str))
     {
@@ -35,9 +61,13 @@ void MinPriorityQ::decreaseKey(string str, unsigned int key)
     {
         std::cout << "name not found" << std::endl;
     }
-}
+}*/
 
-
+/**
+ *  MinPriorityQ::extractMin()
+ *
+ *  extracts and rebuilds minHeap
+ */
 std::string MinPriorityQ::extractMin()
 {
     if(minHeap.size() > 0)
@@ -53,6 +83,13 @@ std::string MinPriorityQ::extractMin()
     }
 }
 
+/**
+ *  MinPriorityQ::findIndex()
+ *
+ *  Finds and returns the index of the string passed in
+ *
+ *  @param str string of desired id
+ */
 int MinPriorityQ::findIndex(string str)
 {
     unsigned int index = -1;
@@ -72,9 +109,73 @@ int MinPriorityQ::findIndex(string str)
     return index;
 }
 
+/**
+ *  MinPriorityQ::decreaseKey()
+ *
+ *  Locates string passed in and changes key value
+ *
+ *  @param 
+ *      str String of desired id to be changed
+ *      key Value of new key desired
+ */
+void MinPriorityQ::decreaseKey(string str, unsigned int key)
+{
+    int index = findIndex(str);
+    minHeap[index]->key = key;
+}
+
+/*
+UNDER CONSTRUCTION
+*/
+/*void MinPriorityQ::heapDecreaseKey(int i, int key)
+{
+    if(minHeap.size() != 0)
+    {
+        if(key < minHeap[i]->key)
+        {
+            cerr << "new key is smaller than current key" << endl;
+        }
+        else
+        {
+            minHeap[i]->key = key;
+            while(i > 0 && minHeap[parent(i)]->key > minHeap[i]->key)
+            {
+                Element* temp = minHeap[i];
+                minHeap[i] = minHeap[parent(i)];
+                minHeap[parent(i)] = temp;
+                i = parent(i);
+            }
+        }
+    }
+}*/
 
 /**
- *  @brief: inserts string and priority into vector
+ *  UNDER CONSTRUCTION
+ */
+/*Element* MinPriorityQ::heapExtractMin()
+{
+    Element* minObject = NULL:
+    if (minHeap.size() == 0)
+    {
+        std::cerr << "nothing to extract" << endl;
+    }
+    else
+    {
+        minObject = minHeap[0];
+        minHeap[0] = minHeap[minHeap.size() - 2];
+        minHeapify(0);
+    }
+    return minObject;
+}*/
+
+/**
+ *  MinPriorityQ::insert()
+ *
+ *  Inserts id and key into minHeap
+ *
+ *  @param  
+ *      str     id to be inserted into minHeap
+ *      key     key value to be inserted into minHeap
  */
 void MinPriorityQ::insert(string str, unsigned int key)
 {
@@ -82,8 +183,10 @@ void MinPriorityQ::insert(string str, unsigned int key)
     minHeap.push_back(object);
 }
 
-
-bool MinPriorityQ::isMember(string str)
+/*
+UNDER CONSTRUCTION
+*/
+/*bool MinPriorityQ::isMember(string str)
 {
     if (!minHeap.empty())
     {
@@ -100,20 +203,33 @@ bool MinPriorityQ::isMember(string str)
     }
 
     return false;
-}
+}*/
 
 /**
- *  @breif: returns index of current node's left child
+ *  MinPriorityQ::left()
+ *
+ *  Returns position of left child
+ *
+ *  @param  
+ *      currentIndex    current position in heap
  */
 int MinPriorityQ::left(int currentIndex)
 {
-    return currentIndex * 2;
+    return (currentIndex * 2) + 1;
 }
 
-void MinPriorityQ::minHeapify(unsigned int index)
+/**
+ *  MinPriorityQ::minHeapify()
+ *
+ *  Creates minHeap
+ *
+ *  @param  
+ *      currentIndex    current position in heap
+ */
+void MinPriorityQ::minHeapify(int index)
 {
 
-    int largest = -1;
+    int smallest = -1;
     int heapSize = minHeap.size() - 1;
     int i = index;
     int l = left(i);
@@ -121,29 +237,42 @@ void MinPriorityQ::minHeapify(unsigned int index)
 
     if(l <= heapSize && (minHeap[l]->key < minHeap[i]->key))
     {
-        largest = l;
+        smallest = l;
     }
     else
     {
-        largest = i;
+        smallest = i;
     }
 
-    if(r <= heapSize && (minHeap[r]->key < minHeap[largest]->key))
+    if(r <= heapSize && (minHeap[r]->key < minHeap[smallest]->key))
     {
-        largest = r;
+        smallest = r;
     }
 
-    if(largest != i)
+    if(smallest != i)
     {
         Element* temp = minHeap[i];
-        minHeap[i] = minHeap[largest];
-        minHeap[largest] = temp;
-        minHeapify(largest);
+        minHeap[i] = minHeap[smallest];
+        minHeap[smallest] = temp;
+        minHeapify(smallest);
     }
 }
+/*
+UNDER CONSTRUCTION
+*/
+/*void MinPriorityQ::minHeapInsert(int key)
+{
+    minHeap.push_back(NULL);
+    key++;
+}*/
 
 /**
- *  @breif: returns index of current node's parent
+ *  MinPriorityQ::parent()
+ *
+ *  Returns position of parent
+ *
+ *  @param  
+ *      currentIndex    current position in heap
  */
 int MinPriorityQ::parent(int currentIndex)
 {
@@ -152,7 +281,11 @@ int MinPriorityQ::parent(int currentIndex)
     return parentIndex;
 }
 
-
+/**
+ *  MinPriorityQ::popAndReturn()
+ *
+ *  Returns id of lowest key value in minHeap
+ */
 std::string MinPriorityQ::popAndReturn()
 {
     std::string str = minHeap.front()->id;
@@ -161,9 +294,14 @@ std::string MinPriorityQ::popAndReturn()
 }
 
 /**
- *  @breif: returns index of current node's right child
+ *  MinPriorityQ::right()
+ *
+ *  Returns position of right child
+ *
+ *  @param  
+ *      currentIndex    current position in heap
  */
 int MinPriorityQ::right(int currentIndex)
 {
-    return (currentIndex * 2) + 1;
+    return (currentIndex * 2) + 2;
 }
