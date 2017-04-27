@@ -69,6 +69,7 @@ private:
 
    // do not modify anything above this line!
    // you may add private functions below (although you shouldn't need to)
+   Node *rbdTreeSearch(Node *, const string &, const string &);
 };
 
 #endif // CSCI_311_RBTREE_H

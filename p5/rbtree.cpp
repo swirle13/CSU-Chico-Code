@@ -121,12 +121,12 @@ void RBTree::rbDelete(const string &key, const string &value)
 {
     vector<Node*> wordsFound;
 
-    Node *tempNode = rbTreeSearch(root, key);
+    Node *tempNode = rbdTreeSearch(root, key, value);
 
     while (tempNode != nil)
     {
         wordsFound.push_back(tempNode);
-        tempNode = rbTreeSearch(tempNode->right, key);
+        tempNode = rbdTreeSearch(tempNode->right, key, value);
     }
 
     while(!wordsFound.empty())
@@ -134,12 +134,11 @@ void RBTree::rbDelete(const string &key, const string &value)
         tempNode = wordsFound.back();
         if(*tempNode->value == value)
         {
-            break;
+            rbDelete(tempNode);
         }
         wordsFound.pop_back();
     }
 
-    rbDelete(tempNode);
 }
 
 void RBTree::rbDeleteFixup(Node *x)
@@ -159,7 +158,7 @@ void RBTree::rbDeleteFixup(Node *x)
                 leftRotate(x->parent);
                 w = x->parent->right;
             }
-            if (w->left->color == 'b' && w->right->color == 'b')
+            if ((w->left->color == 'b') && (w->right->color == 'b'))
             {
                 w->color = 'r';
                 x = x->parent;
@@ -191,7 +190,7 @@ void RBTree::rbDeleteFixup(Node *x)
                 rightRotate(x->parent);
                 w = x->parent->left;
             }
-            if (w->right->color == 'b' && w->left->color == 'b')
+            if ((w->right->color == 'b') && (w->left->color == 'b'))
             {
                 w->color = 'r';
                 x = x->parent;
@@ -357,11 +356,8 @@ void RBTree::rbTransplant(Node *u, Node *v)
     {
         u->parent->right = v;
     }
-
-    if(v != nil)
-    {
-        v->parent = u->parent;
-    }
+    
+    v->parent = u->parent;
 }
 
 RBTree::Node* RBTree::rbTreeMaximum(Node* x)
@@ -406,14 +402,7 @@ RBTree::Node *RBTree::rbTreeSearch(Node *x, const string &key)
 {
     while(x != nil && key != *(x->key))
     {
-        if (key < *(x->key))
-        {
-            x = x->left;
-        }
-        else
-        {
-            x = x->right;
-        }
+        x = rbTreeSuccessor(x);
     }
     return x;
 }
@@ -433,6 +422,31 @@ RBTree::Node *RBTree::rbTreeSuccessor(Node *x)
         y = y->parent;
     }
     return y;
+}
+
+RBTree::Node* RBTree::rbdTreeSearch(Node *x, const string &key, const string &value)
+{
+    while (x != nil && key != *(x->key))
+    {
+        if (key < *(x->key))
+        {
+            x = x->left;
+        }
+        else
+        {
+            x = x->right;
+        }
+    }
+
+    while (x != nil && value != *(x->value))
+    {
+        if (value == *(x->value))
+        {
+            break;
+        }
+        x = x->right;
+    }
+    return x;
 }
 
 void RBTree::reverseInOrderPrint(Node *x, int depth)
