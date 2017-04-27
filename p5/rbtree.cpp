@@ -23,7 +23,7 @@ RBTree::Node::Node()
     right = NULL;
     key = NULL;
     value = NULL;
-    color = 'b';
+    color = 'B';
 }
 
 RBTree::Node::Node(const string &key, const string &value)
@@ -33,7 +33,7 @@ RBTree::Node::Node(const string &key, const string &value)
     parent = NULL;
     left = NULL;
     right = NULL;
-    color = 'r';
+    color = 'R';
 }
 
 // DESTRUCTORS
@@ -76,7 +76,7 @@ void RBTree::leftRotate(Node* x)
 
 void RBTree::rbDelete(Node *z)
 {
-    Node *x;
+    Node *x = nil;
     Node *y = z;
     char yOGcolor = y->color;
 
@@ -92,7 +92,7 @@ void RBTree::rbDelete(Node *z)
     }
     else
     {
-        y = rbTreeMinimum(z->right);
+        y = rbTreePredecessor(z);
         yOGcolor = y->color;
         x = y->right;
         if(y->parent == z)
@@ -101,17 +101,17 @@ void RBTree::rbDelete(Node *z)
         }
         else
         {
-            rbTransplant(y, y->right);
-            y->right = z->right;
-            y->right->parent = y;
+            rbTransplant(y, y->left);
+            y->left = z->left;
+            y->left->parent = y;
         }
         rbTransplant(z, y);
-        y->left = z->left;
-        y->left->parent = y;
+        y->right = z->right;
+        y->right->parent = y;
         y->color = z->color;
     }
 
-    if(yOGcolor == 'b')
+    if(yOGcolor == 'B' && x != nil)
     {
         rbDeleteFixup(x);
     }
@@ -143,38 +143,38 @@ void RBTree::rbDelete(const string &key, const string &value)
 
 void RBTree::rbDeleteFixup(Node *x)
 {
-    Node *w;
+    Node *w = nil;
 
-    while(x != root && x->color == 'b')
+    while(x != root && x->color == 'B')
     {
         if(x == x->parent->left)
         {
             w = x->parent->right;
 
-            if(w->color == 'r')
+            if(w->color == 'R')
             {
-                w->color = 'b';
-                x->parent->color = 'r';
+                w->color = 'B';
+                x->parent->color = 'R';
                 leftRotate(x->parent);
                 w = x->parent->right;
             }
-            if ((w->left->color == 'b') && (w->right->color == 'b'))
+            if ((w->left->color == 'B') && (w->right->color == 'B'))
             {
-                w->color = 'r';
+                w->color = 'R';
                 x = x->parent;
             }
             else
             {
-                if (w->right->color == 'b')
+                if (w->right->color == 'B')
                 {
-                    w->left->color = 'b';
-                    w->color = 'r';
+                    w->left->color = 'B';
+                    w->color = 'R';
                     rightRotate(w);
                     w = x->parent->right;
                 }
                 w->color = x->parent->color;
-                x->parent->color = 'b';
-                w->right->color = 'b';
+                x->parent->color = 'B';
+                w->right->color = 'B';
                 leftRotate(x->parent);
                 x = root;
             }
@@ -183,35 +183,36 @@ void RBTree::rbDeleteFixup(Node *x)
         {
             w = x->parent->left;
 
-            if (w->color == 'r')
+            if (w->color == 'R')
             {
-                w->color = 'b';
-                x->parent->color = 'r';
+                w->color = 'B';
+                x->parent->color = 'R';
                 rightRotate(x->parent);
                 w = x->parent->left;
             }
-            if ((w->right->color == 'b') && (w->left->color == 'b'))
+            if ((w->right->color == 'B') && (w->left->color == 'B'))
             {
-                w->color = 'r';
+                w->color = 'R';
                 x = x->parent;
             }
             else
             {
-                if (w->left->color == 'b')
+                if (w->left->color == 'B')
                 {
-                    w->right->color = 'b';
-                    w->color = 'r';
+                    w->right->color = 'B';
+                    w->color = 'R';
                     leftRotate(w);
                     w = x->parent->left;
                 }
                 w->color = x->parent->color;
-                x->parent->color = 'b';
-                w->left->color = 'b';
+                x->parent->color = 'B';
+                w->left->color = 'B';
                 rightRotate(x->parent);
                 x = root;
             }
         }
     }
+    x->color = 'B';
 }
 
 vector<const string *> RBTree::rbFind(const string &key)
@@ -265,7 +266,7 @@ void RBTree::rbInsert(Node *z)
 
     z->left = nil;
     z->right = nil;
-    z->color = 'r';
+    z->color = 'R';
 
     rbInsertFixup(z);
 }
@@ -278,17 +279,17 @@ void RBTree::rbInsert(const string &key, const string &value)
 
 void RBTree::rbInsertFixup(Node *z)
 {
-    while(z->parent->color == 'r')
+    while(z->parent->color == 'R')
     {
         if(z->parent == z->parent->parent->left)
         {
             Node* y = z->parent->parent->right;
             // case 1
-            if(y->color == 'r')
+            if(y->color == 'R')
             {
-                z->parent->color = 'b';
-                y->color = 'b';
-                z->parent->parent->color = 'r';
+                z->parent->color = 'B';
+                y->color = 'B';
+                z->parent->parent->color = 'R';
                 z = z->parent->parent;
             }
             else
@@ -300,8 +301,8 @@ void RBTree::rbInsertFixup(Node *z)
                     leftRotate(z);
                 }
                 // case 3
-                z->parent->color = 'b';
-                z->parent->parent->color = 'r';
+                z->parent->color = 'B';
+                z->parent->parent->color = 'R';
                 rightRotate(z->parent->parent);
             }
         }
@@ -311,11 +312,11 @@ void RBTree::rbInsertFixup(Node *z)
             {
                 Node *y = z->parent->parent->left;
                 // case 4
-                if ((y->color) == 'r')
+                if ((y->color) == 'R')
                 {
-                    z->parent->color = 'b';
-                    y->color = 'b';
-                    z->parent->parent->color = 'r';
+                    z->parent->color = 'B';
+                    y->color = 'B';
+                    z->parent->parent->color = 'R';
                     z = z->parent->parent;
                 }
                 else
@@ -327,14 +328,14 @@ void RBTree::rbInsertFixup(Node *z)
                         rightRotate(z);
                     }
                     // case 6
-                    z->parent->color = 'b';
-                    z->parent->parent->color = 'r';
+                    z->parent->color = 'B';
+                    z->parent->parent->color = 'R';
                     leftRotate(z->parent->parent);
                 }
             }
         }
     }
-    root->color = 'b';
+    root->color = 'B';
 }
 
 void RBTree::rbPrintTree()
