@@ -384,7 +384,7 @@ RBTree::Node *RBTree::rbTreePredecessor(Node *x)
 {
     if (x->left != nil)
     {
-        return rbTreeMaximum(x->right);
+        return rbTreeMaximum(x->left);
     }
 
     Node *y = x->parent;
@@ -402,8 +402,16 @@ RBTree::Node *RBTree::rbTreeSearch(Node *x, const string &key)
 {
     while(x != nil && key != *(x->key))
     {
-        x = rbTreeSuccessor(x);
+        if(key < *(x->key))
+        {
+            x = x->left;
+        }
+        else
+        {
+            x = x->right;
+        }
     }
+
     return x;
 }
 
@@ -428,14 +436,7 @@ RBTree::Node* RBTree::rbdTreeSearch(Node *x, const string &key, const string &va
 {
     while (x != nil && key != *(x->key))
     {
-        if (key < *(x->key))
-        {
-            x = x->left;
-        }
-        else
-        {
-            x = x->right;
-        }
+        x = rbTreeSuccessor(x);
     }
 
     while (x != nil && value != *(x->value))
