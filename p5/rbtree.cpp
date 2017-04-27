@@ -94,7 +94,7 @@ void RBTree::rbDelete(Node *z)
     {
         y = rbTreePredecessor(z);
         yOGcolor = y->color;
-        x = y->right;
+        x = y->left;
         if(y->parent == z)
         {
             x->parent = y;
@@ -111,7 +111,7 @@ void RBTree::rbDelete(Node *z)
         y->color = z->color;
     }
 
-    if(yOGcolor == 'B' && x != nil)
+    if(yOGcolor == 'B')
     {
         rbDeleteFixup(x);
     }
