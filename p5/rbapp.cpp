@@ -1,3 +1,11 @@
+/**
+ * @file    rbapp.cpp
+ * 
+ * @brief   Functions that pertain to rbapp.h
+ * 
+ * @author  Troy Jones
+ * @date    4/27/17
+ */ 
 #include "rbapp.h"
 #include <cctype>
 
@@ -13,8 +21,11 @@ int main()
     app.mainLoop();
 }
 
-///////////////////////////////////////////////
-
+/**
+ * mainLoop()
+ *
+ * Initiates the main program
+ */
 void RBapp::mainLoop()
 {
     string command = "";
@@ -25,6 +36,16 @@ void RBapp::mainLoop()
     }
 }
 
+/**
+ * processCommand()
+ *
+ * Processes the command input, and delegates from there
+ *
+ * @param command The command passed in
+ *
+ * @return bool Returns true or false to the calling function to determine
+ *              whether to continue with the program or not
+ */
 bool RBapp::processCommand(string& command)
 {
     if(command == "insert")
@@ -62,6 +83,14 @@ bool RBapp::processCommand(string& command)
     }
 }
 
+/**
+ * processDelete()
+ *
+ * Splits the inputted key and data and passes them into a private delete
+ *  function
+ *
+ * @param keyAndData The key and satellite data
+ */
 void RBapp::processDelete(string& keyAndData)
 {
     string key = "";

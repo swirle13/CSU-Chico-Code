@@ -1,5 +1,11 @@
-// rbtree.cpp 
-
+/**
+ * @file    rbtree.cpp
+ * 
+ * @brief   Functions that pertain to rbtree.h
+ * 
+ * @author  Troy Jones
+ * @date    3/30/17
+ */
 #include <iostream>
 #include <iomanip>
 #include "rbtree.h"
@@ -219,11 +225,27 @@ vector<const string *> RBTree::rbFind(const string &key)
 {
     vector<const string *> wordsFound;
     Node *tempNode = rbTreeSearch(root, key);
-    
-    while (tempNode != nil)
+
+    if (tempNode != nil && *(tempNode->key) == key)
     {
         wordsFound.push_back(tempNode->value);
-        tempNode = rbTreeSearch(tempNode->right, key);
+    }
+    while(tempNode != nil && *(tempNode->key) == key)
+    {
+        tempNode = rbTreeSuccessor(tempNode);
+        if (tempNode != nil && *(tempNode->key) == key)
+        {
+            wordsFound.push_back(tempNode->value);
+        }
+    }
+    tempNode = rbTreeSearch(root, key);
+    while (tempNode != nil && *(tempNode->key) == key)
+    {
+        tempNode = rbTreePredecessor(tempNode);
+        if (tempNode != nil && *(tempNode->key) == key)
+        {
+            wordsFound.push_back(tempNode->value);
+        }
     }
 
     return wordsFound;
@@ -373,7 +395,7 @@ RBTree::Node* RBTree::rbTreeMaximum(Node* x)
 
 RBTree::Node *RBTree::rbTreeMinimum(Node *x)
 {
-    while(x->left != nil)
+    while((x->left) != nil)
     {
         x = x->left;
     }
@@ -401,19 +423,19 @@ RBTree::Node *RBTree::rbTreePredecessor(Node *x)
 
 RBTree::Node *RBTree::rbTreeSearch(Node *x, const string &key)
 {
-    while(x != nil && key != *(x->key))
-    {
-        if(key < *(x->key))
-        {
-            x = x->left;
-        }
-        else
-        {
-            x = x->right;
-        }
-    }
 
-    return x;
+    if(x == nil || key == *(x->key))
+    {
+        return x;
+    }
+    if (key < *(x->key))
+    {
+        return rbTreeSearch(x->left, key);
+    }
+    else
+    {
+        return rbTreeSearch(x->right, key);
+    }
 }
 
 RBTree::Node *RBTree::rbTreeSuccessor(Node *x)
