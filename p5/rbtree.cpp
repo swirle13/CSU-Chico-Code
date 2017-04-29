@@ -46,7 +46,50 @@ RBTree::Node::Node(const string &key, const string &value)
 
 RBTree::~RBTree()
 {
+    vector<Node *> nodes;
+    Node *found = root;
+    Node *tempNode = found;
+
+    if (found != nil)
+    {
+        nodes.push_back(tempNode);
+        
+        while (tempNode != nil)
+        {
+            tempNode = rbTreeSuccessor(tempNode);
+            if (tempNode != nil)
+            {
+                nodes.push_back(tempNode);
+            }
+        }
+
+        tempNode = found;
+
+        while (tempNode != nil)
+        {
+            tempNode = rbTreePredecessor(tempNode);
+            if (tempNode != nil)
+            {
+                nodes.push_back(tempNode);
+            }
+        }
+    }
+
+    if (!nodes.empty())
+    {
+        Node *n;
+        for (unsigned int it = 0; it != nodes.size(); ++it)
+        {
+            n = nodes[it];
+            delete n->key;
+            delete n->value;
+            delete n;
+        }
+    }
+    nodes.clear();
 }
+
+RBTree::Node::~Node(){}
 
 // FUNCTIONS(in alpha order asc)
 
@@ -121,30 +164,55 @@ void RBTree::rbDelete(Node *z)
     {
         rbDeleteFixup(x);
     }
+
 }
 
 void RBTree::rbDelete(const string &key, const string &value)
 {
-    vector<Node*> wordsFound;
+    vector<Node *> wordsFound;
+    Node *found = rbTreeSearch(root, key);
+    Node *tempNode = found;
 
-    Node *tempNode = rbdTreeSearch(root, key, value);
-
-    while (tempNode != nil)
+    if (found != nil)
     {
-        wordsFound.push_back(tempNode);
-        tempNode = rbdTreeSearch(tempNode->right, key, value);
-    }
-
-    while(!wordsFound.empty())
-    {
-        tempNode = wordsFound.back();
-        if(*tempNode->value == value)
+        if(*(tempNode->value) == value)
         {
-            rbDelete(tempNode);
+            wordsFound.push_back(tempNode);
         }
-        wordsFound.pop_back();
+        while (tempNode != nil)
+        {
+            tempNode = rbTreeSuccessor(tempNode);
+            if (tempNode != nil && *(tempNode->key) == key && *(tempNode->value) == value)
+            {
+                wordsFound.push_back(tempNode);
+            }
+        }
+
+        tempNode = found;
+
+        while (tempNode != nil)
+        {
+            tempNode = rbTreePredecessor(tempNode);
+            if (tempNode != nil && *(tempNode->key) == key && *(tempNode->value) == value)
+            {
+                wordsFound.push_back(tempNode);
+            }
+        }
     }
 
+    if(!wordsFound.empty())
+    {
+        Node *n;
+        for (unsigned int it = 0; it != wordsFound.size(); ++it)
+        {
+            n = wordsFound[it];
+            rbDelete(n);
+            delete n->key;
+            delete n->value;
+            delete n;
+        }
+    }
+    wordsFound.clear();
 }
 
 void RBTree::rbDeleteFixup(Node *x)
@@ -224,27 +292,31 @@ void RBTree::rbDeleteFixup(Node *x)
 vector<const string *> RBTree::rbFind(const string &key)
 {
     vector<const string *> wordsFound;
-    Node *tempNode = rbTreeSearch(root, key);
+    Node* found = rbTreeSearch(root, key);
+    Node *tempNode = found;
 
-    if (tempNode != nil && *(tempNode->key) == key)
+
+    if (found != nil)
     {
         wordsFound.push_back(tempNode->value);
-    }
-    while(tempNode != nil && *(tempNode->key) == key)
-    {
-        tempNode = rbTreeSuccessor(tempNode);
-        if (tempNode != nil && *(tempNode->key) == key)
+        while(tempNode != nil)
         {
-            wordsFound.push_back(tempNode->value);
+            tempNode = rbTreeSuccessor(tempNode);
+            if (tempNode != nil && *(tempNode->key) == key)
+            {
+                wordsFound.push_back(tempNode->value);
+            }
         }
-    }
-    tempNode = rbTreeSearch(root, key);
-    while (tempNode != nil && *(tempNode->key) == key)
-    {
-        tempNode = rbTreePredecessor(tempNode);
-        if (tempNode != nil && *(tempNode->key) == key)
+
+        tempNode = found;
+
+        while(tempNode != nil)
         {
-            wordsFound.push_back(tempNode->value);
+            tempNode = rbTreePredecessor(tempNode);
+            if (tempNode != nil && *(tempNode->key) == key)
+            {
+                wordsFound.push_back(tempNode->value);
+            }
         }
     }
 
@@ -457,10 +529,8 @@ RBTree::Node *RBTree::rbTreeSuccessor(Node *x)
 
 RBTree::Node* RBTree::rbdTreeSearch(Node *x, const string &key, const string &value)
 {
-    while (x != nil && key != *(x->key))
-    {
-        x = rbTreeSuccessor(x);
-    }
+
+    x = rbTreeSearch(x, key);
 
     while (x != nil && value != *(x->value))
     {
