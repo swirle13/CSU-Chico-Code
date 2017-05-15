@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Clark! We need you!",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/mstapp",
+            "MIMode": "gdb",
+            "miDebuggerPath": "",
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "externalConsole": true,
+            "visualizerFile": "${workspaceRoot}/my.natvis",
+            "args": [
+                "<",
+                "input.txt",
+                ">",
+                "myOut"
+            ]
+        }
+    ]
+}
